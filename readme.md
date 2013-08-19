@@ -15,3 +15,8 @@ In this repo I will track the evolution my config files along with the rationale
 * [Vim Ninjas](http://www.vimninjas.com/)
 * [Use Vim](http://usevim.com/)
 
+### Sources
+
+#### For Color schemes
+
+* [distinguished.vim](https://github.com/Lokaltog/vim-distinguished)
