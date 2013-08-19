@@ -8,6 +8,16 @@ The plan is to give VIM a chance, starting with a fresh new install. I will trac
 
 In this repo I will track the evolution my config files along with the rationale behind each addition.
 
+## How to use
+
+Read the readme (it's this file), then
+
+
+		git clone git@github.com/leanucci/vim-stuff.git ~/vim-stuff
+		ln -s ~/vim-stuff/vimrc ~/.vimrc
+		ln -s ~/vim-stuff ~/.vim
+
+
 ## Helpful Links
 
 ### General reference
@@ -20,3 +30,7 @@ In this repo I will track the evolution my config files along with the rationale
 #### For Color schemes
 
 * [distinguished.vim](https://github.com/Lokaltog/vim-distinguished)
+
+#### For other stuff
+
+* [Pathogen](https://github.com/tpope/vim-pathogen)
