@@ -12,11 +12,9 @@ In this repo I will track the evolution my config files along with the rationale
 
 Read the readme (it's this file), then
 
-
 		git clone git@github.com/leanucci/vim-stuff.git ~/vim-stuff
 		ln -s ~/vim-stuff/vimrc ~/.vimrc
 		ln -s ~/vim-stuff ~/.vim
-
 
 ## Helpful Links
 
