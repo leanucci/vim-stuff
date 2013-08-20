@@ -32,12 +32,8 @@ if has('mouse')
   set mouse=a
 endif
 " }}}
-" Switch syntax highlighting on, when the terminal has colors ------------- {{{
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
+" Switch syntax highlighting on ------------------------------------------- {{{
+syntax on
 " }}}
 " Only do this part when compiled with support for autocommands. ---------- {{{
 if has("autocmd")
@@ -118,4 +114,6 @@ augroup END
 " Set textwidth to 0 ------------------------------------------------------ {{{
 set textwidth=0
 " }}}
-
+" enable plugins ---------------------------------------------------------- {{{
+filetype plugin indent on
+" }}}
