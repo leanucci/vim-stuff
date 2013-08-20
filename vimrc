@@ -1,19 +1,25 @@
-" Use Vim settings, rather than Vi settings (much better!).
+" Use Vim settings, rather than Vi settings (much better!). ---------------- {{{
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-
-" allow backspacing over everything in insert mode
+" }}}
+" allow backspacing over everything in insert mode ------------------------- {{{
 set backspace=indent,eol,start
-
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+" }}}
+" do not keep a backup file ------------------------------------------------ {{{
+set nobackup
+" }}}
+" do not keep a swap file -------------------------------------------------- {{{
+set noswapfile
+" }}}
+" keep 50 lines of command line history ------------------------------------ {{{
+set history=50
+" }}}
+" display incomplete commands ---------------------------------------------- {{{
+set showcmd
+" }}}
+" do incremental searching ------------------------------------------------- {{{
+set incsearch
+" }}}
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
