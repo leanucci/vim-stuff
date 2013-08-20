@@ -90,5 +90,6 @@ endif
 " Added as per vim-markdown readme, to avoid folding
 let g:vim_markdown_folding_disabled=1
 
-" Numbers, up to 3 digits
-set number numberwidth=3
+" Color scheme
+colorscheme distinguished
+
