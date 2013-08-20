@@ -83,3 +83,7 @@ execute pathogen#infect()
 " enable plugins ---------------------------------------------------------- {{{
 filetype plugin indent on
 " }}}
+" Switch syntax highlighting on ------------------------------------------- {{{
+syntax on
+" }}}
+
