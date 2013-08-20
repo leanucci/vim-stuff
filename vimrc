@@ -86,4 +86,7 @@ filetype plugin indent on
 " Switch syntax highlighting on ------------------------------------------- {{{
 syntax on
 " }}}
-
+" Show invisibles --------------------------------------------------------- {{{
+set listchars=trail:•,precedes:«,extends:»,eol:¬,tab:▸▸
+set list
+" }}}
