@@ -102,3 +102,13 @@ set number numberwidth=5
 " Editing this file
 nnoremap <leader>q :source $MYVIMRC<cr>
 
+" Statusline -------------------- {{{
+set laststatus=2
+set statusline=%-35.35F 		" reserve 35 chars for full filename
+set statusline+=%-15.15y		" reserve 15 chars for filetype
+set statusline+=%l			" current line number
+set statusline+=/			" sepparator
+set statusline+=%L			" total lines
+set statusline+=%=			" go to the right
+set statusline+=%3m 			" reserve 3 spaces for modified flag
+" }}}
