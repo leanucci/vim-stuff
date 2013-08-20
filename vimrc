@@ -77,6 +77,9 @@ augroup END
 " Set textwidth to 0 ------------------------------------------------------ {{{
 set textwidth=0
 " }}}
+" sexy shit for pathogen -------------------------------------------------- {{{
+execute pathogen#infect()
+" }}}
 " enable plugins ---------------------------------------------------------- {{{
 filetype plugin indent on
 " }}}
