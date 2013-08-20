@@ -112,3 +112,10 @@ set statusline+=%L			" total lines
 set statusline+=%=			" go to the right
 set statusline+=%3m 			" reserve 3 spaces for modified flag
 " }}}
+
+" Vimscript file settings ------------------------- {{{
+augroup filetype_vim
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
