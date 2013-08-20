@@ -93,3 +93,6 @@ let g:vim_markdown_folding_disabled=1
 " Color scheme
 colorscheme distinguished
 
+" Font and size
+set guifont=Monaco:h13
+
