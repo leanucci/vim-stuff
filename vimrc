@@ -77,13 +77,15 @@ else
 
 endif " has("autocmd")
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
+" Convenient command to see the difference between the current ---- {{{
+" buffer and the file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
+
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+" }}}
 
 " Added as per vim-markdown readme, to avoid folding
 let g:vim_markdown_folding_disabled=1
