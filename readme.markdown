@@ -22,6 +22,7 @@ Read the readme (it's this file), then
 
 * [Vim Ninjas](http://www.vimninjas.com/)
 * [Use Vim](http://usevim.com/)
+* [Learn Vimscript the Hard Way](http://learnvimscriptthehardway.stevelosh.com/)
 
 ### Sources
 
