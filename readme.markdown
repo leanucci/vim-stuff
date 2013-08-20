@@ -6,7 +6,7 @@ I've been jumping around the most widely known text editors for the past 7 years
 
 The plan is to give VIM a chance, starting with a fresh new install. I will track my every move, to help others jump into this world.
 
-In this repo I will track the evolution my config files along with the rationale behind each addition.
+In this repo I will track the evolution of my config files along with the rationale behind each addition.
 
 ## How to use
 
