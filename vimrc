@@ -99,3 +99,6 @@ set guifont=Monaco:h13
 " Numbers, up to 5 digits
 set number numberwidth=5
 
+" Editing this file
+nnoremap <leader>q :source $MYVIMRC<cr>
+
