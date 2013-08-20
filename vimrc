@@ -115,3 +115,7 @@ augroup filetype_vim
 	autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
+" Set textwidth to 0 ------------------------------------------------------ {{{
+set textwidth=0
+" }}}
+
