@@ -48,7 +48,7 @@ let g:vim_markdown_folding_disabled=1
 colorscheme distinguished
 " }}}
 " Font and size ----------------------------------------------------------- {{{
-set guifont=Monaco:h13
+set guifont=Monaco:h16
 " }}}
 " Numbers, up to 5 digits ------------------------------------------------- {{{
 set number numberwidth=5
