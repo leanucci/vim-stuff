@@ -90,3 +90,8 @@ syntax on
 set listchars=trail:•,precedes:«,extends:»,eol:¬,tab:▸▸
 set list
 " }}}
+" Use 2 spaces as tab size ------------------------------------------------ {{{
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" }}}
