@@ -58,7 +58,7 @@ nnoremap <leader>q :source $MYVIMRC<cr>
 " }}}
 " Statusline -------------------------------------------------------------- {{{
 set laststatus=2
-set statusline=%-35.35F 		" reserve 35 chars for full filename
+set statusline=%-60.60F 		" reserve 60 chars for full filename
 set statusline+=%-15.15y		" reserve 15 chars for filetype
 set statusline+=%l			" current line number
 set statusline+=/			" sepparator
