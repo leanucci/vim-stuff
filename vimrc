@@ -48,7 +48,8 @@ let g:vim_markdown_folding_disabled=1
 colorscheme distinguished
 " }}}
 " Font and size ----------------------------------------------------------- {{{
-set guifont=Monaco:h16
+"set guifont=Inconsolata\ for\ Powerline:h16
+set guifont=Liberation\ Mono\ for\ Powerline:h15
 " }}}
 " Numbers, up to 5 digits ------------------------------------------------- {{{
 set number numberwidth=5
@@ -56,7 +57,7 @@ set number numberwidth=5
 " Editing this file ------------------------------------------------------- {{{
 nnoremap <leader>q :source $MYVIMRC<cr>
 " }}}
-" Statusline -------------------------------------------------------------- {{{
+" Statusline vim-airline -------------------------------------------------- {{{
 set laststatus=2
 set statusline=%-60.60F 		" reserve 60 chars for full filename
 set statusline+=%-15.15y		" reserve 15 chars for filetype
@@ -67,6 +68,7 @@ set statusline+=@ 			" at
 set statusline+=%4c			" column number
 set statusline+=%=			" go to the right
 set statusline+=%3m 			" reserve 3 spaces for modified flag
+let g:airline_powerline_fonts = 1
 " }}}
 " Vimscript file settings ------------------------------------------------- {{{
 augroup filetype_vim
@@ -94,4 +96,8 @@ set list
 set tabstop=2
 set shiftwidth=2
 set expandtab
+" }}}
+" Tab shortcut for non gui mode ------------------------------------------- {{{
+nnoremap <C-J> :tabprevious<CR>
+nnoremap <C-K> :tabnext<CR>
 " }}}
