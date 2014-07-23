@@ -49,7 +49,7 @@ colorscheme distinguished
 " }}}
 " Font and size ----------------------------------------------------------- {{{
 "set guifont=Inconsolata\ for\ Powerline:h16
-set guifont=Liberation\ Mono\ for\ Powerline:h15
+set guifont=Liberation\ Mono\ for\ Powerline:h12
 " }}}
 " Numbers, up to 5 digits ------------------------------------------------- {{{
 set number numberwidth=5
