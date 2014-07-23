@@ -96,8 +96,11 @@ set list
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set smartindent
 " }}}
 " Tab shortcut for non gui mode ------------------------------------------- {{{
 nnoremap <C-J> :tabprevious<CR>
 nnoremap <C-K> :tabnext<CR>
 " }}}
+" Display margin at 100th column ------------------------------------------- {{{
+set colorcolumn=100
