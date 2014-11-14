@@ -1,4 +1,4 @@
-" Use Vim settings, rather than Vi settings (much better!). --------------- {{{
+I" Use Vim settings, rather than Vi settings (much better!). --------------- {{{
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 " }}}
@@ -45,11 +45,11 @@ endif
 let g:vim_markdown_folding_disabled=1
 " }}}
 " Color scheme ------------------------------------------------------------ {{{
-colorscheme distinguished
+colorscheme autobot
 " }}}
 " Font and size ----------------------------------------------------------- {{{
 "set guifont=Inconsolata\ for\ Powerline:h16
-set guifont=Liberation\ Mono\ for\ Powerline:h12
+set guifont=Liberation\ Mono\ for\ Powerline:h14
 " }}}
 " Numbers, up to 5 digits ------------------------------------------------- {{{
 set number numberwidth=5
@@ -102,5 +102,3 @@ set smartindent
 nnoremap <C-J> :tabprevious<CR>
 nnoremap <C-K> :tabnext<CR>
 " }}}
-" Display margin at 100th column ------------------------------------------- {{{
-set colorcolumn=100
