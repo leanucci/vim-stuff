@@ -45,11 +45,11 @@ endif
 let g:vim_markdown_folding_disabled=1
 " }}}
 " Color scheme ------------------------------------------------------------ {{{
-colorscheme autobot
+colorscheme github
 " }}}
 " Font and size ----------------------------------------------------------- {{{
 "set guifont=Inconsolata\ for\ Powerline:h16
-set guifont=Liberation\ Mono\ for\ Powerline:h14
+set guifont=Monaco:h14
 " }}}
 " Numbers, up to 5 digits ------------------------------------------------- {{{
 set number numberwidth=5
