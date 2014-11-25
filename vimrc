@@ -58,17 +58,17 @@ set number numberwidth=5
 nnoremap <leader>q :source $MYVIMRC<cr>
 " }}}
 " Statusline vim-airline -------------------------------------------------- {{{
-set laststatus=2
-set statusline=%-60.60F 		" reserve 60 chars for full filename
-set statusline+=%-15.15y		" reserve 15 chars for filetype
-set statusline+=%l			" current line number
-set statusline+=/			" sepparator
-set statusline+=%-4L			" total lines
-set statusline+=@ 			" at
-set statusline+=%4c			" column number
-set statusline+=%=			" go to the right
-set statusline+=%3m 			" reserve 3 spaces for modified flag
-let g:airline_powerline_fonts = 1
+"set laststatus=2
+"set statusline=%-60.60F 		" reserve 60 chars for full filename
+"set statusline+=%-15.15y		" reserve 15 chars for filetype
+"set statusline+=%l			" current line number
+"set statusline+=/			" sepparator
+"set statusline+=%-4L			" total lines
+"set statusline+=@ 			" at
+"set statusline+=%4c			" column number
+"set statusline+=%=			" go to the right
+"set statusline+=%3m 			" reserve 3 spaces for modified flag
+"let g:airline_powerline_fonts = 1
 " }}}
 " Vimscript file settings ------------------------------------------------- {{{
 augroup filetype_vim
