@@ -102,3 +102,6 @@ set smartindent
 nnoremap <C-J> :tabprevious<CR>
 nnoremap <C-K> :tabnext<CR>
 " }}}
+" Ctrlp.vim excluded paths
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/](bin)$',}
