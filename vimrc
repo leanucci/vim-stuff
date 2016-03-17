@@ -41,21 +41,8 @@ if has('mouse')
   set mouse=a
 endif
 
-" Convenient command to see the difference between the current
-" buffer and the file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-        \ | wincmd p | diffthis
-endif
-
 " Added as per vim-markdown readme, to avoid folding
 let g:vim_markdown_folding_disabled=1
-
-" Color scheme
-colorscheme vibrantink
-" colorscheme github
 
 " Numbers, up to 3 digits
 set number numberwidth=3
@@ -95,19 +82,17 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " Vexplore config
-nnoremap <leader>q :Vexplore<CR>
-let g:netrw_liststyle=3
-let g:netrw_winsize=20
-let g:netrw_browse_split=2
-
-" More natural splits
-set splitbelow
-set splitright
+" nnoremap <leader>q :Vexplore<CR>
+" NERDTree togggle
+nnoremap <leader>q :NERDTreeToggle<CR>
 
 " Window sizing
-set winwidth=120
+set winwidth=90
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "dark"
 
 " lemme copy to clipboard
 vnoremap <C-c> "*y
@@ -118,6 +103,14 @@ vnoremap <C-c> "*y
 set winheight=6
 set winminheight=6
 set winheight=999
+
+let g:netrw_liststyle=3
+let g:netrw_winsize=25
+let g:netrw_browse_split=2
+
+" More natural splits
+set splitbelow
+set splitright
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROMOTE VARIABLE TO RSPEC LET
@@ -185,7 +178,7 @@ function! RunTests(filename)
         " Fall back to the .test-commands pipe if available, assuming someone
         " is reading the other side and running the commands
         elseif filewritable(".test-commands")
-          let cmd = 'be rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
+          let cmd = 'be rspec --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
           exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
 
           " Write an empty string to block until the command completes
@@ -194,13 +187,13 @@ function! RunTests(filename)
           redraw!
         " Fall back to a blocking test run with Bundler
         elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
+            exec ":!bundle exec rspec " . a:filename
         " If we see python-looking tests, assume they should be run with Nose
         elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
             exec "!nosetests " . a:filename
         " Fall back to a normal blocking test run
         else
-            exec ":!rspec --color " . a:filename
+            exec ":!rspec " . a:filename
         end
     end
 endfunction
@@ -224,3 +217,9 @@ endfunction
 " gutentags stuff
 """"""""""""""""""""""""""""""""""""""""""""
 let g:gutentags_project_root = ['Makefile']
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:set t_Co=256 " 256 colors
+:set background=dark
+:color grb256
