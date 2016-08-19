@@ -78,8 +78,10 @@ nnoremap <C-K> :tabnext<CR>
 
 " Ctrlp.vim excluded paths
 let g:ctrlp_custom_ignore = {
-      \ 'dir': '\v[\/](bin|tmp)$',
+      \ 'dir': '\v[\/](bin|tmp|images)$',
   \ }
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_root_markers = ['ROOT']
 
 " Vexplore config
 " nnoremap <leader>q :Vexplore<CR>
@@ -92,7 +94,7 @@ set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "dark"
+let g:airline_theme = "molokai"
 
 " lemme copy to clipboard
 vnoremap <C-c> "*y
@@ -123,7 +125,7 @@ function! PromoteToLet()
   :normal ==
 endfunction
 :command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
+:map <leader>y :PromoteToLet<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
@@ -216,10 +218,10 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""
 " gutentags stuff
 """"""""""""""""""""""""""""""""""""""""""""
-let g:gutentags_project_root = ['Makefile']
+let g:gutentags_project_root = ['ROOT']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
 :set background=dark
-:color grb256
+:color vibrantink
