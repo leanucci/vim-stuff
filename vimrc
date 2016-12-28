@@ -92,8 +92,6 @@ nnoremap <leader>q :NERDTreeToggle<CR>
 set winwidth=90
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline
-let g:airline_powerline_fonts = 1
 let g:airline_theme = "molokai"
 
 " lemme copy to clipboard
