@@ -92,8 +92,9 @@ let g:ctrlp_root_markers = ['ROOT']
 nnoremap <leader>q :NERDTreeToggle<CR>
 
 " Window sizing
-set winwidth=90
+set winwidth=115
 set laststatus=2
+set showtabline=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 let g:airline_theme = "molokai"
 
