@@ -72,6 +72,9 @@ set shiftwidth=2
 set expandtab
 set smartindent
 
+" NERDCommenter space delimiters
+let g:NERDSpaceDelims = 1
+
 " Tab shortcut for non gui mode
 nnoremap <C-J> :tabprevious<CR>
 nnoremap <C-K> :tabnext<CR>
