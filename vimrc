@@ -148,8 +148,11 @@ function! RunTestFile(...)
         let command_suffix = ""
     endif
 
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.py\)$') != -1
+    " Are we in a test file?
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|test_.*\.py\|_test.py\)$') != -1
+
+    " Run the tests for the previously-marked file (or the current file if
+    " it's a test).
     if in_test_file
         call SetTestFile(command_suffix)
     elseif !exists("t:grb_test_file")
@@ -169,39 +172,21 @@ function! SetTestFile(command_suffix)
 endfunction
 
 function! RunTests(filename)
+    let sep = '----------------------------------------'
     " Write the file and run tests for the given filename
     if expand("%") != ""
       :w
     end
     if match(a:filename, '\.feature$') != -1
-        exec ":!be cucumber " . a:filename
+        exec ":!script/features " . a:filename
     else
-        " First choice: project-specific test script
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        " Fall back to the .test-commands pipe if available, assuming someone
-        " is reading the other side and running the commands
-        elseif filewritable(".test-commands")
-          let cmd = 'be rspec --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
-          exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
-
-          " Write an empty string to block until the command completes
-          sleep 100m " milliseconds
-          :!echo > .test-commands
-          redraw!
-        " Fall back to a blocking test run with Bundler
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec " . a:filename
-        " If we see python-looking tests, assume they should be run with Nose
-        elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
-            exec "!nosetests " . a:filename
-        " Fall back to a normal blocking test run
+        if filereadable("Gemfile")
+            exec ":!bundle exec rspec --color " . a:filename . ";echo " . sep
         else
-            exec ":!rspec " . a:filename
+            exec ":!rspec --color " . a:filename . ";echo " . sep
         end
     end
 endfunction
-
 
 """"""""""""""""""""""""""""""""""""""""""""
 " rubocop
@@ -214,7 +199,7 @@ function! RunRubocop(...)
     :w
   end
 
-  exec ":!bundle exec rubocop " . expand("%")
+  exec ":!rubocop " . expand("%")
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""
