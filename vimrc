@@ -211,4 +211,4 @@ let g:gutentags_project_root = ['ROOT']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
 :set background=dark
-:color vibrantink
+:color blues
