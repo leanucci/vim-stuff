@@ -63,7 +63,8 @@ filetype plugin indent on
 syntax on
 
 " Show invisibles
-set listchars=trail:•,precedes:«,extends:»,eol:¬,tab:▸▸
+" set listchars=trail:•,precedes:«,extends:»,eol:¬,tab:▸▸
+set listchars=trail:•,precedes:«,extends:»,tab:▸▸
 set list
 
 " Use 2 spaces as tab size
@@ -218,3 +219,6 @@ let g:gutentags_project_root = ['ROOT']
 " Source:   http://stackoverflow.com/questions/563616/vimctags-tips-and-tricks
 "--------------------
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
+" puts the caller
+nnoremap <leader>u oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc>
