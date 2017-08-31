@@ -100,7 +100,11 @@ set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 let g:airline_theme = "molokai"
 
 " lemme copy to clipboard
-vnoremap <C-c> "*y
+set clipboard=unnamedplus
+vnoremap y "+y
+nnoremap y "+y
+vnoremap p "+p
+nnoremap p "+p
 
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
