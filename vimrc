@@ -86,6 +86,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_root_markers = ['ROOT']
+let g:ctrlp_working_path_mode = ''
 
 " Vexplore config
 " nnoremap <leader>q :Vexplore<CR>
@@ -216,7 +217,7 @@ let g:gutentags_project_root = ['ROOT']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
 :set background=dark
-:color blues
+:color new-railscasts
 
 "--------------------
 " Function: Open tag under cursor in new tab
@@ -225,4 +226,4 @@ let g:gutentags_project_root = ['ROOT']
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " puts the caller
-nnoremap <leader>u oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc>
+nnoremap <leader>u oputs "#" * 90<c-m>pp caller<c-m>puts "#" * 90<esc>
