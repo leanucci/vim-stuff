@@ -73,6 +73,12 @@ set shiftwidth=2
 set expandtab
 set smartindent
 
+" Use 4 spaces for golang tab size
+augroup filetype_go
+  set tabstop=4
+  set shiftwidth=4
+augroup END
+
 " NERDCommenter space delimiters
 let g:NERDSpaceDelims = 1
 
@@ -200,7 +206,7 @@ function! RunRubocop(...)
     :w
   end
 
-  exec ":!rubocop " . expand("%")
+  exec ":!rubocop -a " . expand("%")
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -212,7 +218,7 @@ let g:gutentags_project_root = ['ROOT']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
 :set background=dark
-:color blues
+:color zellner
 
 "--------------------
 " Function: Open tag under cursor in new tab
