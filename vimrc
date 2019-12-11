@@ -53,6 +53,12 @@ augroup filetype_vim
   autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
+" golang file settings
+autocmd FileType go set nolist
+autocmd FileType go set tabstop=4
+autocmd FileType go set shiftwidth=4
+autocmd FileType go nmap <leader>b :!go build<CR>
+
 " sexy shit for pathogen
 execute pathogen#infect()
 
@@ -88,7 +94,8 @@ nnoremap <C-K> :tabnext<CR>
 
 " Ctrlp.vim excluded paths
 let g:ctrlp_custom_ignore = {
-      \ 'dir': '\v[\/](bin|tmp|images)$',
+      \ 'dir': '\v[\/](bin|tmp|images|log)$',
+      \ 'file': '\v\.(gem)$'
   \ }
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_root_markers = ['ROOT']
@@ -188,9 +195,19 @@ function! RunTests(filename)
         exec ":!script/features " . a:filename
     else
         if filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename . ";echo " . sep
+            if match(a:filename, '.spec$') != -1
+                exec ":!bundle exec rspec --color " . a:filename . ";echo " . sep
+            elseif match(a:filename, '.test$') != -1
+                exec ":!ruby -I\"lib:test\"" . a:filename
+            else
+              exec ":!echo 'nomatch'"
+            end
         else
-            exec ":!rspec --color " . a:filename . ";echo " . sep
+            if match(a:filename, '.spec$') != -1
+                exec ":!rspec --color " . a:filename . ";echo " . sep
+            elseif match(a:filename, '.test$') != -1
+                exec ":!ruby -I\"lib:test\"" . a:filename
+            end
         end
     end
 endfunction
@@ -206,18 +223,19 @@ function! RunRubocop(...)
     :w
   end
 
-  exec ":!rubocop -a " . expand("%")
+  exec ":!rubocop -a --format simple " . expand("%")
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""
 " gutentags stuff
 """"""""""""""""""""""""""""""""""""""""""""
 let g:gutentags_project_root = ['ROOT']
+set statusline+=%{gutentags#statusline()}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
-:set background=dark
+" :set background=dark
 :color zellner
 
 "--------------------
@@ -227,4 +245,7 @@ let g:gutentags_project_root = ['ROOT']
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " puts the caller
-nnoremap <leader>u oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc>
+nnoremap <leader>u oputs "" + "#" * 90<c-m>pp caller<c-m>puts "#" * 90<esc>
+nnoremap <leader>i ologger.info "" + "#" * 90<c-m>logger.info pp caller<c-m>logger.info "#" * 90<esc>
+
+:set modeline
