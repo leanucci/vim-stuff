@@ -54,10 +54,12 @@ augroup filetype_vim
 augroup END
 
 " golang file settings
-autocmd FileType go set nolist
-autocmd FileType go set tabstop=4
-autocmd FileType go set shiftwidth=4
-autocmd FileType go nmap <leader>b :!go build<CR>
+augroup filetype_go
+  autocmd FileType go set nolist
+  autocmd FileType go set tabstop=4
+  autocmd FileType go set shiftwidth=4
+  autocmd FileType go nmap <leader>b :!go build<CR>
+augroup END
 
 " sexy shit for pathogen
 execute pathogen#infect()
@@ -79,12 +81,6 @@ set shiftwidth=2
 set expandtab
 set smartindent
 
-" Use 4 spaces for golang tab size
-augroup filetype_go
-  set tabstop=4
-  set shiftwidth=4
-augroup END
-
 " NERDCommenter space delimiters
 let g:NERDSpaceDelims = 1
 
@@ -97,8 +93,11 @@ let g:ctrlp_custom_ignore = {
       \ 'dir': '\v[\/](bin|tmp|images|log)$',
       \ 'file': '\v\.(gem)$'
   \ }
-let g:ctrlp_map = '<leader>p'
+" let g:ctrlp_map = '<leader>p'
 let g:ctrlp_root_markers = ['ROOT']
+
+set rtp+=~/.fzf
+nnoremap <leader>p :Files<cr>
 
 " Vexplore config
 " nnoremap <leader>q :Vexplore<CR>
@@ -110,7 +109,9 @@ set winwidth=115
 set laststatus=2
 set showtabline=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-let g:airline_theme = "molokai"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline_theme = "bubblegum"
 
 " lemme copy to clipboard
 vnoremap <C-c> "*y
