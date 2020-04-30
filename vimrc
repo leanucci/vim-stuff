@@ -58,7 +58,26 @@ augroup filetype_go
   autocmd FileType go set nolist
   autocmd FileType go set tabstop=4
   autocmd FileType go set shiftwidth=4
-  autocmd FileType go nmap <leader>b :!go build<CR>
+
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+
+  function! s:build_go_files()
+    let l:file = expand('%')
+    if l:file =~# '^\f\+_test\.go$'
+      call go#test#Test(0, 1)
+    elseif l:file =~# '^\f\+\.go$'
+      call go#cmd#Build(0)
+    endif
+  endfunction
+
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+  let g:go_addtags_transform = "camelcase"
+  let g:go_highlight_fields = 1
+  let g:go_highlight_types = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_function_calls = 1
 augroup END
 
 " sexy shit for pathogen
@@ -73,7 +92,7 @@ syntax on
 " Show invisibles
 " set listchars=trail:•,precedes:«,extends:»,eol:¬,tab:▸▸
 set listchars=trail:•,precedes:«,extends:»,tab:▸▸
-set list
+set nolist
 
 " Use 2 spaces as tab size
 set tabstop=2
@@ -92,12 +111,33 @@ nnoremap <C-K> :tabnext<CR>
 let g:ctrlp_custom_ignore = {
       \ 'dir': '\v[\/](bin|tmp|images|log)$',
       \ 'file': '\v\.(gem)$'
-  \ }
+      \ }
 " let g:ctrlp_map = '<leader>p'
 let g:ctrlp_root_markers = ['ROOT']
 
 set rtp+=~/.fzf
 nnoremap <leader>p :Files<cr>
+nnoremap <leader>. :Buffers<cr>
+
+" Using floating windows of Neovim to start fzf
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --border --margin=0,2'
+
+  function! FloatingFZF()
+    let width = float2nr(&columns * 0.9)
+    let height = float2nr(&lines * 0.6)
+    let opts = { 'relative': 'editor',
+          \ 'row': (&lines - height) / 2,
+          \ 'col': (&columns - width) / 2,
+          \ 'width': width,
+          \ 'height': height }
+
+    let win = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    call setwinvar(win, '&winhighlight', 'NormalFloat:Normal')
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+endif
 
 " Vexplore config
 " nnoremap <leader>q :Vexplore<CR>
@@ -157,60 +197,60 @@ nnoremap <leader>c :w\|:!script/features<cr>
 nnoremap <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
 
-    " Are we in a test file?
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|test_.*\.py\|_test.py\)$') != -1
+  " Are we in a test file?
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|test_.*\.py\|_test.py\)$') != -1
 
-    " Run the tests for the previously-marked file (or the current file if
-    " it's a test).
-    if in_test_file
-        call SetTestFile(command_suffix)
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file)
+  " Run the tests for the previously-marked file (or the current file if
+  " it's a test).
+  if in_test_file
+    call SetTestFile(command_suffix)
+  elseif !exists("t:grb_test_file")
+    return
+  end
+  call RunTests(t:grb_test_file)
 endfunction
 
 function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number)
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number)
 endfunction
 
 function! SetTestFile(command_suffix)
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@% . a:command_suffix
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@% . a:command_suffix
 endfunction
 
 function! RunTests(filename)
-    let sep = '----------------------------------------'
-    " Write the file and run tests for the given filename
-    if expand("%") != ""
-      :w
-    end
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
+  let sep = '----------------------------------------'
+  " Write the file and run tests for the given filename
+  if expand("%") != ""
+    :w
+  end
+  if match(a:filename, '\.feature$') != -1
+    exec ":!script/features " . a:filename
+  else
+    if filereadable("Gemfile")
+      if match(a:filename, '.spec$') != -1
+        exec ":!bundle exec rspec --color " . a:filename . ";echo " . sep
+      elseif match(a:filename, '.test$') != -1
+        exec ":!ruby -I\"lib:test\"" . a:filename
+      else
+        exec ":!echo 'nomatch'"
+      end
     else
-        if filereadable("Gemfile")
-            if match(a:filename, '.spec$') != -1
-                exec ":!bundle exec rspec --color " . a:filename . ";echo " . sep
-            elseif match(a:filename, '.test$') != -1
-                exec ":!ruby -I\"lib:test\"" . a:filename
-            else
-              exec ":!echo 'nomatch'"
-            end
-        else
-            if match(a:filename, '.spec$') != -1
-                exec ":!rspec --color " . a:filename . ";echo " . sep
-            elseif match(a:filename, '.test$') != -1
-                exec ":!ruby -I\"lib:test\"" . a:filename
-            end
-        end
+      if match(a:filename, '.spec$') != -1
+        exec ":!rspec --color " . a:filename . ";echo " . sep
+      elseif match(a:filename, '.test$') != -1
+        exec ":!ruby -I\"lib:test\"" . a:filename
+      end
     end
+  end
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -236,8 +276,8 @@ set statusline+=%{gutentags#statusline()}
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
-:set background=light
-:color zellner
+:set background=dark
+:color vividchalk
 
 "--------------------
 " Function: Open tag under cursor in new tab
@@ -250,3 +290,4 @@ nnoremap <leader>u oputs "" + "#" * 90<c-m>pp caller<c-m>puts "#" * 90<esc>
 nnoremap <leader>i ologger.info "" + "#" * 90<c-m>logger.info pp caller<c-m>logger.info "#" * 90<esc>
 
 :set modeline
+
